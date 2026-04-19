@@ -5,6 +5,8 @@ from __future__ import annotations
 import logging
 from collections.abc import Generator, Sequence
 from contextlib import contextmanager
+from dataclasses import dataclass
+from datetime import datetime
 
 import psycopg2
 import psycopg2.extras
@@ -13,6 +15,7 @@ from psycopg2.extensions import connection as pgconnection
 from .api import SolarWeatherRecord
 
 logger = logging.getLogger(__name__)
+
 
 CREATE_TABLE_SQL = """
 CREATE TABLE IF NOT EXISTS solar_weather_data (
@@ -118,3 +121,6 @@ def upsert_records(
     with get_connection(database_url) as conn, conn.cursor() as cur:
         psycopg2.extras.execute_values(cur, UPSERT_SQL, rows, page_size=500)
         logger.info("[%s] Upsert complete — %s", label, cur.statusmessage)
+
+
+
