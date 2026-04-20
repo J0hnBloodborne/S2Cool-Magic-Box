@@ -1,0 +1,23 @@
+name: Sync to Hugging Face hub
+
+on:
+  push:
+    branches: [main]
+  # to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  sync-to-hub:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install huggingface-cli
+        run: pip install -U "huggingface_hub[cli]"
+
+      - name: Sync to Hugging Face
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          huggingface-cli upload Rolaficus/S2Cool-HF . . --repo-type space --commit-message "Sync from GitHub Actions" --token $HF_TOKEN
