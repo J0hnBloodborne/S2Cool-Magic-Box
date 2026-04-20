@@ -10,10 +10,8 @@ RUN npm run build
 FROM python:3.12-slim
 WORKDIR /app
 
-# Install dependencies for python packages like psycopg2 if needed
-RUN apt-get update && apt-get install -y --no-install-recommends gcc libpq-dev && rm -rf /var/lib/apt/lists/*
-
-COPY requirements.txt ./
+# Install backend runtime dependencies only.
+COPY backend/requirements.txt ./requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 COPY --from=build-frontend /app/frontend/dist ./frontend/dist
