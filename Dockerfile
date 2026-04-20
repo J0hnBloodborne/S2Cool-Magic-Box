@@ -7,7 +7,7 @@ COPY frontend/ ./
 RUN npm run build
 
 # Stage 2: Serve the application with Python FastAPI
-FROM python:3.13-slim
+FROM python:3.12-slim
 WORKDIR /app
 
 # Install dependencies for python packages like psycopg2 if needed
