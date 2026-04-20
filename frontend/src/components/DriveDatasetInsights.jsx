@@ -1,7 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
 import {
-  Bar,
-  BarChart,
   CartesianGrid,
   Legend,
   Line,
@@ -410,22 +408,6 @@ export default function DriveDatasetInsights() {
                   <Line yAxisId="ghi" type="monotone" dataKey="avg_ghi" stroke="#fbbf24" name="Avg GHI (W/m²)" dot={false} />
                   <Line yAxisId="temp" type="monotone" dataKey="avg_temp" stroke="#22d3ee" name="Avg Temp (°C)" dot={false} />
                 </LineChart>
-              </ResponsiveContainer>
-            </SectionCard>
-          )}
-
-          {data.by_city.length > 0 && (
-            <SectionCard title="City Comparison" sub="Average metrics by city">
-              <ResponsiveContainer width="100%" height={300}>
-                <BarChart data={data.by_city}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#27272a" />
-                  <XAxis dataKey="city" tick={{ fill: "#71717a", fontSize: 10 }} />
-                  <YAxis tick={{ fill: "#71717a", fontSize: 10 }} />
-                  <Tooltip content={<ChartTooltip />} />
-                  <Legend wrapperStyle={{ fontSize: 11, color: "#a1a1aa" }} />
-                  <Bar dataKey="avg_ghi" fill="#fbbf24" name="Avg GHI (W/m²)" />
-                  <Bar dataKey="avg_temp" fill="#3b82f6" name="Avg Temp (°C)" />
-                </BarChart>
               </ResponsiveContainer>
             </SectionCard>
           )}
